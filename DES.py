@@ -9,7 +9,7 @@ def one ():
     
     """
     dc.check_app_has_data()
-    build.show(two, three, "Data Screen Explorer 1")
+    return build.show(two, three, "Data Screen Explorer 1")
 
 
 def two ():
@@ -17,7 +17,7 @@ def two ():
     
     """
     dc.check_app_has_data()
-    build.show(three, one, "Data Screen Explorer 2")
+    return build.show(three, one, "Data Screen Explorer 2")
 
 
 def three ():
@@ -25,6 +25,6 @@ def three ():
     
     """
     dc.check_app_has_data()
-    build.show(one, two, "Data Screen Explorer 3")
+    return build.show(one, two, "Data Screen Explorer 3")
     
     
