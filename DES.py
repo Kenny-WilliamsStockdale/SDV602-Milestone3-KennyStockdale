@@ -13,7 +13,7 @@ def one ():
 
 
 def two ():
-    """upon application load checks if data is loaded, then redirects to Data Screen Explorer 1
+    """upon application load checks if data is loaded, then redirects to Data Screen Explorer 2
     
     """
     dc.check_app_has_data()
@@ -21,7 +21,7 @@ def two ():
 
 
 def three ():
-    """upon application load checks if data is loaded, then redirects to Data Screen Explorer 1
+    """upon application load checks if data is loaded, then redirects to Data Screen Explorer 3
     
     """
     dc.check_app_has_data()
