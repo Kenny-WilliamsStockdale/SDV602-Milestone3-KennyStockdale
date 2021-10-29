@@ -10,7 +10,7 @@ import data_controller as dc
 import login
 import DES
 from matplotlib.backends.backend_tkagg import NavigationToolbar2Tk
-
+from db_controller import accounts
 matplotlib.use('TkAgg')
 
  # ------ ANCHOR DELETE CANVAS SECTION ------ #
@@ -111,7 +111,8 @@ def show(nextScreen, previousScreen, des_name):
     # ------ ANCHOR LOOP & PROCESS BUTTON & MENU CHOICES ------ #
     while True:
         event, values = window.read()
-        if event in (sg.WIN_CLOSED, 'Exit'):
+        if event == None or event == 'Exit':
+            accounts["localuser"] = ""
             break
         print(event, values)
         # ------ Process button choices ------ #
@@ -157,5 +158,6 @@ def show(nextScreen, previousScreen, des_name):
             window.close()
             return DES.three()
         if event == 'Logout':
+            accounts["localuser"] = ""
             window.close()
             return login.login_main()

@@ -7,7 +7,7 @@ import PySimpleGUI as sg
 import db_controller as dbc
 from DES import one as DES1
 # ------------------------------- LOGIN MAIN PAGE START -------------------------------
-
+accounts = dbc.accounts
 
 def login_main():
     """
@@ -39,7 +39,7 @@ def login_main():
                     window["error"].update("Incorrect Password")
                     continue
 
-                dbc.localuser = username
+                accounts["localuser"]= username
                 window.close()
                 return DES1
             else:
@@ -95,7 +95,7 @@ def registration():
                 outcome = dbc.add_user(username, password)
                 if outcome:
                     window["error"].update(f"{outcome}")
-                dbc.localuser = username
+                accounts["localuser"] = username
                 #print(dbc.localuser)
                 window.close()
                 return DES1

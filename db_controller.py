@@ -1,5 +1,7 @@
 from db import get_database
-localuser = ""
+accounts = {
+    'localuser': ""
+}
 
 dbname = get_database()
 # ---User---------------
