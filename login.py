@@ -18,10 +18,10 @@ def login_main():
         [sg.Text('Username:')],
         [sg.Input(k='username')],
         [sg.Text('Password:')],
-        [sg.Input(k='password')],
+        [sg.Input(k='password', password_char='*')],
         [sg.Button('Login'), sg.Button('Register')],
         [sg.Button('Exit Application')]]
-    window = sg.Window('Property Titles Login Page', layout, finalize=True)
+    window = sg.Window('Angler Fish Data Login Page', layout, finalize=True)
     while True:
         event, values = window.read()
         print(event, values)
@@ -67,9 +67,9 @@ def registration():
         [sg.Input(k='password', password_char='*')],
         [sg.Text('Confirm Password:')],
         [sg.Input(k='confirm_password', password_char='*')],
-        [sg.Button('Login'), sg.Button('Register')],
-        [sg.Button('Exit Application')]]
-    window = sg.Window('Property Titles Login Page', layout,
+        [sg.Button('Register')],
+        [sg.Button('Back'),sg.Button('Exit Application')]]
+    window = sg.Window('Angler Fish Data Registration Page', layout,
                        finalize=True, size=(350, 250))
     while True:
         event, values = window.read()
@@ -100,7 +100,7 @@ def registration():
                 window.close()
                 return DES1
 
-        if event == 'Login':
+        if event == 'Back':
             window.close()
             return login_main
 # ------------------------------- REGISTRATION PAGE END -------------------------------
