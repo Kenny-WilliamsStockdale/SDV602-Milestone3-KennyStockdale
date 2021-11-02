@@ -3,28 +3,49 @@
 """
 import build
 import data_controller as dc
+import db_controller as dbc
 
-def one ():
+
+def one():
     """upon application load checks if data is loaded, then redirects to Data Screen Explorer 1
-    
+
     """
+    nextScreen = two
+    previousScreen = three
     dc.check_app_has_data()
-    return build.show(two, three, "Data Screen Explorer 1")
+    return build.show(
+        nextScreen,
+        previousScreen,
+        "Data Screen Explorer 1",
+        dbc.chats("DES1 Chat")
+    )
 
 
-def two ():
+def two():
     """upon application load checks if data is loaded, then redirects to Data Screen Explorer 2
-    
+
     """
+    nextScreen = three
+    previousScreen = one
     dc.check_app_has_data()
-    return build.show(three, one, "Data Screen Explorer 2")
+    return build.show(
+        nextScreen, 
+        previousScreen,
+        "Data Screen Explorer 2",
+        dbc.chats("DES2 Chat")
+    )
 
 
-def three ():
+def three():
     """upon application load checks if data is loaded, then redirects to Data Screen Explorer 3
-    
+
     """
+    nextScreen = one
+    previousScreen = two
     dc.check_app_has_data()
-    return build.show(one, two, "Data Screen Explorer 3")
-    
-    
+    return build.show(
+        nextScreen,
+        previousScreen,
+        "Data Screen Explorer 3",
+        dbc.chats("DES3 Chat")
+    )

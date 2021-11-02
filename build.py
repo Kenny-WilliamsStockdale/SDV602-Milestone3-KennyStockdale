@@ -40,7 +40,7 @@ def get_figure(des_name):
         return figures.stack_plot()
 
 
-def show(nextScreen, previousScreen, des_name):
+def show(nextScreen, previousScreen, des_name, chats):
     """Generates a template for data explorer screens. 
     As every screen has the same template it makes sense to bundle it together.
     Allows for basic navigation between all generated screens
@@ -88,12 +88,12 @@ def show(nextScreen, previousScreen, des_name):
     layout = [
         [sg.Menu(menu_def, tearoff=False, pad=(200, 1))],
         [sg.Canvas(key='-CANVAS-')],
-        [sg.Multiline(default_text='Chat History:',
+        [sg.Multiline( key='chat',default_text='Chat History:',
                       size=(55, 11), font=('current 12'), disabled=True),
         sg.Frame(layout=[
             
-        [sg.Multiline(size=(80, 7), font=('current 12'))],
-        [sg.Button('Send', size=(81, 0), font=('current 12'))],
+        [sg.Multiline(key='chatinput-key',size=(80, 7), font=('current 12'))],
+        [sg.Button('Send', key='send_key', size=(81, 0), font=('current 12'))],
         ], title='Chat input', font=('current 12') )],
         
         [sg.Button('Previous', font=('current 20')), sg.Button('Next', font=('current 20') )]]
@@ -107,23 +107,38 @@ def show(nextScreen, previousScreen, des_name):
     
     fig = get_figure(des_name)
     fig_canvas_agg = draw_figure(window['-CANVAS-'].TKCanvas, fig)
+    
+    #Start chat thread
+    thread = chats.thread_start(chats)
 
     # ------ ANCHOR LOOP & PROCESS BUTTON & MENU CHOICES ------ #
     while True:
-        event, values = window.read()
+        event, values = window.read(timeout=1000, timeout_key="TIMEOUT")
+        
+        if event == 'TIMEOUT':
+            window['chat'].update(chats.chat)
+            continue
+        
         if event == None or event == 'Exit':
             accounts["localuser"] = ""
+            chats.exitflag = 1
+            thread.join()
+            window.close()
             break
         print(event, values)
         # ------ Process button choices ------ #
         if event == 'Previous':
             if fig_canvas_agg:
                 delete_figure_agg(fig_canvas_agg)
+            chats.exitflag = 1
+            thread.join()
             window.close()
             return previousScreen()
         if event == 'Next':
             if fig_canvas_agg:
                 delete_figure_agg(fig_canvas_agg)
+            chats.exitflag = 1
+            thread.join()
             window.close()
             return nextScreen()
 
@@ -149,15 +164,33 @@ def show(nextScreen, previousScreen, des_name):
             fig_canvas_agg = draw_figure(window['-CANVAS-'].TKCanvas, fig)
             
         if event == 'Size of Angler fish(DES1)':
+            chats.exitflag = 1
+            thread.join()
             window.close()
             return DES.one()
         if event == 'Angler fish observed(DES2)':
+            chats.exitflag = 1
+            thread.join()
             window.close()
             return DES.two()
         if event == 'Min and max depth of angler fish(DES3)':
+            chats.exitflag = 1
+            thread.join()
             window.close()
             return DES.three()
         if event == 'Logout':
             accounts["localuser"] = ""
+            chats.exitflag = 1
+            thread.join()
             window.close()
             return login.login_main()
+        if event == 'send_key':
+            if values['chatinput-key']  == '':
+                print('Nothing to send')
+                continue
+            result = chats.send_message(accounts['localuser'], values['chatinput-key'])
+            if result:
+                print('error')
+            window['chat'].update('')
+            continue
+        
