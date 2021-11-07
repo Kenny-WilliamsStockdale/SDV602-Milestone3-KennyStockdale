@@ -80,7 +80,7 @@ class chats:
                 break
             time.sleep(delay)
             collection_name = dbname["chats"]
-            DES_chat.chat = DES_chat.retrieve_chat(
+            DES_chat.chat = DES_chat.get_recent_chat(
                 collection_name.find_one({"title": DES_chat.title})["chat"])
 
     def thread_start(self, DES_chat):

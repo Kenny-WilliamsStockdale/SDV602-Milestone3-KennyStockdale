@@ -109,6 +109,7 @@ def show(nextScreen, previousScreen, des_name, chats):
     fig_canvas_agg = draw_figure(window['-CANVAS-'].TKCanvas, fig)
     
     #Start chat thread
+    print(chats)
     thread = chats.thread_start(chats)
 
     # ------ ANCHOR LOOP & PROCESS BUTTON & MENU CHOICES ------ #
@@ -117,6 +118,7 @@ def show(nextScreen, previousScreen, des_name, chats):
         
         if event == 'TIMEOUT':
             window['chat'].update(chats.chat)
+            window.Element('chat').set_vscroll_position(1.0)
             continue
         
         if event == None or event == 'Exit':
@@ -189,6 +191,7 @@ def show(nextScreen, previousScreen, des_name, chats):
                 print('Nothing to send')
                 continue
             result = chats.send_message(accounts['localuser'], values['chatinput-key'])
+            window['chatinput-key'].update('')
             if result:
                 print('error')
             window['chat'].update('')
