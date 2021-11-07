@@ -1,4 +1,4 @@
-"""# Invoking start script/function for user to begin the proccess of using the application.  
+""" Invoking start script/function for user to begin the proccess of using the application.  
 """
 import login
 

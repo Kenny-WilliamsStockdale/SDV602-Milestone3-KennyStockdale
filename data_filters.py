@@ -2,7 +2,7 @@
 
 """
 import data_controller as dc
-
+ # ------ ANCHOR LINEPLOT DATA ------ #
 def fishAmountYear():  #Lineplot data
     """
     Returns:
@@ -19,7 +19,7 @@ def fishAmountYear():  #Lineplot data
 
     return (dictline)
 
-
+# ------ ANCHOR PIECHART DATA ------ #
 def sizeFish():  # Piechart data
     """
     Returns:
@@ -53,6 +53,7 @@ def sizeFish():  # Piechart data
     values = list(barData.values())
     return labels, values
 
+# ------ ANCHOR STACKPLOT DATA ------ #
 def depth ():  # Stackplot data
     """
     Returns:

@@ -57,7 +57,7 @@ def login_main():
 
 def registration():
     """
-        function opens welcome login page. Navigation to available
+        function opens a window for users to register with the application for use
     """
     layout = [
         [sg.Text(k='error')],

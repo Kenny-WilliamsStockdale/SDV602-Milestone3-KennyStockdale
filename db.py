@@ -1,4 +1,9 @@
 def get_database():
+    """[Connection to remote datastore/ database]
+
+    Returns:
+        [connection]: [creates or select the connetion to current database]
+    """
     from pymongo import MongoClient
     
     # Get cert from and allow communicationm from database
