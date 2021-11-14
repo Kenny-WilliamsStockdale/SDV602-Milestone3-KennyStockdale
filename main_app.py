@@ -4,6 +4,8 @@ import login
 
 # Run any window object passed in 
 def run(window):
+    """[run window that has an object passed into it]
+    """
     if window == None or window == "Exit":
         return
     window = window()
